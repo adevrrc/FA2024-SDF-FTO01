@@ -21,7 +21,14 @@ def format_greeting(first_name: str, last_name: str,
     Returns:
         str: A formatted greeting using the specified person's name.
     """
+    if not isinstance(first_name, str):
+        raise TypeError("The first name must be a string.")
+    
     first_name = first_name.strip()
+
+    if first_name == "":
+        raise ValueError("The first name must contain at least one"
+                         " non-whitespace character.")
 
     if first_name != "":
         first_name += " "
@@ -55,4 +62,6 @@ def to_binary(decimal_number: int) -> str:
 
     return binary_number
 
-print(to_binary(127))
+#print(to_binary(127))
+
+print(format_greeting("\tDamien", "Altenburg"))
