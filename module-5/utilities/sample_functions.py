@@ -7,8 +7,7 @@ __author__ = "Damien Altenburg"
 
 def format_greeting(first_name: str, last_name: str, 
                     salutation="Hello", title="Mr.") -> str:
-    """
-    Returns a formatted greeting with the specified name.
+    """Returns a formatted greeting with the specified name.
 
     Args:
         first_name (str): The person's first name.
@@ -22,7 +21,7 @@ def format_greeting(first_name: str, last_name: str,
         str: A formatted greeting with the specified name.
 
     Raises:
-        TypeError: Raise when any parameter is not a str type.
+        TypeError: Raise when any parameter is not a string type.
         ValueError: Raised when last_name, salutation, or title does not
                     contain non-whitespace characters.
     """
@@ -32,31 +31,34 @@ def format_greeting(first_name: str, last_name: str,
     if not isinstance(last_name, str):
         raise TypeError("Last name must be a str.")
 
+    first_name = first_name.strip()
+    last_name = last_name.strip()
+
     if last_name.strip() == "":
         raise ValueError("Last name must contain non-whitespace characters.")
     
     if not isinstance(salutation, str):
-        raise TypeError("Saltation must be a str.")
+        raise TypeError("Salutation must be a str.")
 
-    if salutation.strip() == "":
-        raise ValueError("Saltation must contain non-whitespace characters.")
+    salutation = salutation.strip()
+
+    if salutation == "":
+        raise ValueError("Salutation must contain non-whitespace characters.")
     
     if not isinstance(title, str):
         raise TypeError("Title must be a str.")
 
-    if title.strip() == "":
+    title = title.strip()
+
+    if title == "":
         raise ValueError("Title must contain non-whitespace characters.")
     
-    first_name = first_name.strip()
+    full_name = f"{first_name} {last_name}".strip()
 
-    if first_name != "":
-        first_name += " "
-
-    return f"{salutation}, {title} {first_name}{last_name}"
+    return f"{salutation}, {title} {full_name}"
 
 def get_whole_number(prompt: str) -> int:
-    """
-    Returns a whole number entered via the console.
+    """Returns a whole number entered via the console.
 
     Args:
         prompt: The text to display for the prompt.
