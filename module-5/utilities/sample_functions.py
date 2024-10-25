@@ -71,7 +71,7 @@ def get_whole_number(prompt: str) -> int:
         ValueError: Raised when the console input is not a whole number.
     """
     if not isinstance(prompt, str):
-        raise TypeError("Prompt must be a string.")
+        raise TypeError("Prompt must be a str.")
     
     whole_number = input(f"{prompt}: ")
 
