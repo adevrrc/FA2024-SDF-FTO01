@@ -35,13 +35,14 @@ __version__ = "0.11.2024"
 __author__ = "Damien Altenburg"
 
 import unittest
+from unittest.mock import patch
 from utilities.sample_functions import format_greeting
 from utilities.sample_functions import get_whole_number
 
 class TestSampleFunctions(unittest.TestCase):
     """The test class tests the sample_functions module."""
 
-    #### format_greeting() Tests
+    #### format_greeting(str, str, str, str) Tests
      
     def test_format_greeting_first_name_not_a_string(self):
         # Arrange
@@ -145,7 +146,45 @@ class TestSampleFunctions(unittest.TestCase):
         actual = str(context.exception)
         self.assertEqual(expected, actual)
 
-    #### get_whole_number Tests
+    def test_format_greeting_returns_a_formatted_greeting_without_a_first_name(self):
+        # Arrange
+        first_name = ""
+        last_name = "Lee"
+
+        # Act
+        actual = format_greeting(first_name, last_name)
+
+        # Assert
+        expected = "Hello, Mr. Lee"
+        self.assertEqual(expected, actual)
+
+    def test_format_greeting_returns_a_formatted_greeting_with_a_first_name(self):
+        # Arrange
+        first_name = "Damien"
+        last_name = "Lee"
+
+        # Act
+        actual = format_greeting(first_name, last_name)
+
+        # Assert
+        expected = "Hello, Mr. Damien Lee"
+        self.assertEqual(expected, actual)
+
+    def test_format_greeting_return_a_formatted_greeting_with_salutation_and_title(self):
+        # Arrange
+        first_name = "Damien"
+        last_name = "Lee"
+        salutation = "Bonjour"
+        title = "Dr."
+
+        # Act
+        actual = format_greeting(first_name, last_name, salutation, title)
+
+        # Assert
+        expected = "Bonjour, Dr. Damien Lee"
+        self.assertEqual(expected, actual)
+
+    #### get_whole_number(str) Tests
 
     def test_get_whole_number_prompt_not_a_string(self):
         # Arrange
@@ -158,6 +197,35 @@ class TestSampleFunctions(unittest.TestCase):
         # Assert
         expected = "Prompt must be a str."
         actual = str(context.exception)
+        self.assertEqual(expected, actual)
+
+    def test_get_whole_number_input_not_a_whole_number(self):
+        # Arrange
+        prompt = "Enter a whole number"
+
+        # Act
+        with patch("builtins.input") as mock_input:
+            mock_input.side_effect = ["hello"]
+
+            with self.assertRaises(ValueError) as context:
+                get_whole_number(prompt)
+
+        # Assert
+        expected = "Input must be a whole number."
+        actual = str(context.exception)
+        self.assertEqual(expected, actual)
+
+    def test_get_whole_number_return_whole_number_entered_via_keyboard(self):
+        # Arrange
+        prompt = "Enter your age"
+
+        # Act
+        with patch("builtins.input") as mock_input:
+            mock_input.side_effect = ["23"]
+            actual = get_whole_number(prompt)
+
+        # Assert
+        expected = 23
         self.assertEqual(expected, actual)
 
 if __name__ == "__main__":
