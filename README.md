@@ -1,3 +1,3 @@
-# FA2024 FTE01 Demonstrations
+# FA2024 FTO01 Demonstrations
 
-This repository contains the demonstration source for Damien's FA2024-SDF-FTE01 section.
+This repository contains the demonstration source for Damien's FA2024-SDF-FTO01 section.
