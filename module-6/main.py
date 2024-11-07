@@ -45,5 +45,7 @@ def main():
 
     print(card.is_face_up)
 
+    print(PlayingCard.HIGHEST_RANK)
+
 if __name__ == "__main__":
     main()

@@ -9,6 +9,8 @@ from playing_card.suit import Suit
 class PlayingCard:
     """Represents a standard playing card."""
 
+    HIGHEST_RANK: int = Rank.KING.value
+
     def __init__(self, rank: Rank, suit: Suit):
         """"""
         if not isinstance(rank, Rank):
@@ -40,7 +42,7 @@ class PlayingCard:
     def suit(self, suit: Suit) -> None:
         if not isinstance(suit, Suit):
             raise TypeError("The suit must be a Suit.")
-            
+
         self.__suit = suit
 
     @property
@@ -57,4 +59,7 @@ class PlayingCard:
         return f"PlayingCard({self.__rank}, {self.__suit})"
     
     def __str__(self) -> str:
+        # TODO:
+        # Represent the card in different ways depending on whether
+        # it's face up or not.
         return f"{self.__rank.name.title()} {self.__suit.name.title()}"
