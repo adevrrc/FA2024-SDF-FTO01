@@ -41,11 +41,13 @@ def main():
 
     print(card.is_face_up)
 
+    print(card)
+
     card.flip()
 
     print(card.is_face_up)
 
-    print(PlayingCard.HIGHEST_RANK)
+    print(card)
 
 if __name__ == "__main__":
     main()
